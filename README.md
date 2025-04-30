@@ -25,7 +25,6 @@ This application provides a way to organize a personal library. You can categori
 * **Effortless Shelf Management:** Quickly move books between categories using the intuitive dropdown menu associated with each book.
 * **Powerful Book Search:** Discover new books by entering keywords related to titles, authors, or ISBNs. The search updates dynamically as you type.
 * **Direct Library Integration:** Seamlessly add books found through search directly to your personal bookshelves with a single click.
-* **Stay Informed:** When searching, books already in your library will clearly indicate their current shelf, preventing duplicates and providing context.
 
 ## API Interaction
 
