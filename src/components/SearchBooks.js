@@ -7,7 +7,7 @@ function SearchBooks({ onCloseSearch, myBooks, onMoveBook }) {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = useCallback(async (newQuery) => {
-    setQuery(newQuery); // Update the query state immediately
+    setQuery(newQuery);
 
     if (newQuery.trim() === "") {
       setSearchResults([]);
@@ -15,7 +15,9 @@ function SearchBooks({ onCloseSearch, myBooks, onMoveBook }) {
     }
 
     const results = await search(newQuery, 20);
-    if (results) {
+    console.log("Search Results:", results);
+
+    if (results && Array.isArray(results)) {
       const updatedResults = results.map((book) => {
         const existingBook = myBooks.find((b) => b.id === book.id);
         if (existingBook) {
@@ -29,16 +31,16 @@ function SearchBooks({ onCloseSearch, myBooks, onMoveBook }) {
     }
   }, [myBooks]);
 
-  const debouncedSearch = useCallback((event) => {
+  const debouncedSearch = useCallback((newQuery) => {
     setTimeout(() => {
-      handleSearch(event.target.value);
-    }, 300); // Adjust the delay (in milliseconds) as needed
+      handleSearch(newQuery);
+    }, 300);
   }, [handleSearch]);
 
-  // Directly update the query state on input change, and then debounce the search
   const handleInputChange = (event) => {
-    setQuery(event.target.value);
-    debouncedSearch(event);
+    const newQuery = event.target.value;
+    setQuery(newQuery);
+    debouncedSearch(newQuery);
   };
 
   return (
@@ -52,7 +54,7 @@ function SearchBooks({ onCloseSearch, myBooks, onMoveBook }) {
             type="text"
             placeholder="Search by title, author, or ISBN"
             value={query}
-            onChange={handleInputChange} // Use the new handleInputChange
+            onChange={handleInputChange}
           />
         </div>
       </div>

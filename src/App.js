@@ -19,9 +19,14 @@ function App() {
 
   const moveBook = async (book, newShelf) => {
     await update(book, newShelf);
-    setBooks(
-      books.map((b) => (b.id === book.id ? { ...b, shelf: newShelf } : b))
-    );
+    setBooks((prevBooks) => {
+      const bookExists = prevBooks.some((b) => b.id === book.id);
+      if (bookExists) {
+        return prevBooks.map((b) => (b.id === book.id ? { ...b, shelf: newShelf } : b));
+      } else {
+        return [...prevBooks, { ...book, shelf: newShelf }];
+      }
+    });
   };
 
   return (

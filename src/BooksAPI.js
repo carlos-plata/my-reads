@@ -39,4 +39,8 @@ export const search = (query, maxResults) =>
     body: JSON.stringify({ query, maxResults }),
   })
     .then((res) => res.json())
-    .then((data) => (data.books ? data.books : [])); // Handle cases with no search results
+    .then((data) => (data && data.books) ? data.books : []) // Ensure data.books exists before returning
+    .catch((error) => {
+      console.error("Search API error:", error);
+      return []; // Return an empty array in case of an error
+    });
