@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { getAll, update } from "./BooksAPI";
 import BookList from "./components/BookList";
 import SearchBooks from "./components/SearchBooks";
+import { Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -31,23 +31,26 @@ function App() {
 
   return (
     <div className="app">
-      {showSearchPage ? (
-        <SearchBooks
-          onCloseSearch={() => setShowSearchpage(false)}
-          myBooks={books}
-          onMoveBook={moveBook}
-        />
-      ) : (
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
+      <Routes>
+        <Route path="/" element={
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+            <BookList books={books} onMoveBook={moveBook} />
+            <div className="open-search">
+              <Link to="/search">Add a book</Link>
+            </div>
           </div>
-          <BookList books={books} onMoveBook={moveBook} />
-          <div className="open-search">
-            <a onClick={() => setShowSearchpage(true)}>Add a book</a>
-          </div>
-        </div>
-      )}
+        } />
+        <Route path="/search" element={
+          <SearchBooks
+            myBooks={books}
+            onMoveBook={moveBook}
+            onCloseSearch={() => {}}
+          />
+        } />
+      </Routes>
     </div>
   );
 }
