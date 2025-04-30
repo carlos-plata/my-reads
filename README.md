@@ -34,7 +34,6 @@ MyReads utilizes the Udacity Books API to fetch book data and persist your books
 ## Built With
 
 * [React](https://react.dev/) - The JavaScript library used for building the user interface.
-* Create React App - The toolchain used to bootstrap the application.
 * [Udacity Books API](https://github.com/udacity/reactnd-project-myreads-starter) - The backend service providing book data.
 
 ## Acknowledgements
