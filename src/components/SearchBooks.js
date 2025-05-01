@@ -23,6 +23,8 @@ function SearchBooks({ myBooks, onMoveBook }) {
         const existingBook = myBooks.find((b) => b.id === book.id);
         if (existingBook) {
           book.shelf = existingBook.shelf;
+        } else {
+          book.shelf = 'none';
         }
         return book;
       });

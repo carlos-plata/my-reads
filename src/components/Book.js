@@ -21,7 +21,7 @@ function Book({ book, onMoveBook }) {
           ></div>
           <div className="book-shelf-changer">
             <select value={book.shelf || "none"} onChange={handleChangeShelf}>
-              <option value="none" disabled>
+              <option disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>
